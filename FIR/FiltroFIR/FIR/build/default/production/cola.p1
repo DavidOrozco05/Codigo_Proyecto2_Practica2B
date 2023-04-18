@@ -1,0 +1,250 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"14 ./cola.h
+[; ;./cola.h: 14: typedef struct eCola {
+[s S1 `uc -> 15 `i `i 1 `i 1 `i 1 ]
+[n S1 eCola data entrada salida peso ]
+"30
+[; ;./cola.h: 30: int cola_llena(eCola* c);
+[v _cola_llena `(i ~T0 @X0 0 ef1`*S1 ]
+"32
+[; ;./cola.h: 32: int cola_vacia(eCola* c);
+[v _cola_vacia `(i ~T0 @X0 0 ef1`*S1 ]
+"3 cola.c
+[; ;cola.c: 3: void inicie_cola(eCola* c)
+[v _inicie_cola `(v ~T0 @X0 1 ef1`*S1 ]
+"4
+[; ;cola.c: 4: {
+{
+[e :U _inicie_cola ]
+"3
+[; ;cola.c: 3: void inicie_cola(eCola* c)
+[v _c `*S1 ~T0 @X0 1 r1 ]
+"4
+[; ;cola.c: 4: {
+[f ]
+"5
+[; ;cola.c: 5:     c->entrada=0;
+[e = . *U _c 1 -> 0 `i ]
+"6
+[; ;cola.c: 6:     c->salida=0;
+[e = . *U _c 2 -> 0 `i ]
+"7
+[; ;cola.c: 7:     c->peso=0;
+[e = . *U _c 3 -> 0 `i ]
+"8
+[; ;cola.c: 8: }
+[e :UE 2 ]
+}
+"18
+[; ;cola.c: 18: char cola_add(eCola* c,DATOCOLA dato)
+[v _cola_add `(uc ~T0 @X0 1 ef2`*S1`uc ]
+"19
+[; ;cola.c: 19: {
+{
+[e :U _cola_add ]
+"18
+[; ;cola.c: 18: char cola_add(eCola* c,DATOCOLA dato)
+[v _c `*S1 ~T0 @X0 1 r1 ]
+[v _dato `uc ~T0 @X0 1 r2 ]
+"19
+[; ;cola.c: 19: {
+[f ]
+"24
+[; ;cola.c: 24:     if(!cola_llena(c)){
+[e $ ! ! != ( _cola_llena (1 _c -> 0 `i 4  ]
+{
+"25
+[; ;cola.c: 25:         c->data[c->entrada]=dato;
+[e = *U + &U . *U _c 0 * -> -> . *U _c 1 `ui `ux -> -> # *U &U . *U _c 0 `ui `ux _dato ]
+"26
+[; ;cola.c: 26:         c->entrada++;
+[e ++ . *U _c 1 -> 1 `i ]
+"27
+[; ;cola.c: 27:         c->peso++;
+[e ++ . *U _c 3 -> 1 `i ]
+"28
+[; ;cola.c: 28:     }
+}
+[e $U 5  ]
+"29
+[; ;cola.c: 29:     else
+[e :U 4 ]
+"30
+[; ;cola.c: 30:     {
+{
+"31
+[; ;cola.c: 31:         return 1;
+[e ) -> -> 1 `i `uc ]
+[e $UE 3  ]
+"32
+[; ;cola.c: 32:     }
+}
+[e :U 5 ]
+"35
+[; ;cola.c: 35:     if (c->entrada >=15)
+[e $ ! >= . *U _c 1 -> 15 `i 6  ]
+"36
+[; ;cola.c: 36:         c->entrada=0;
+[e = . *U _c 1 -> 0 `i ]
+[e :U 6 ]
+"37
+[; ;cola.c: 37:     return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 3  ]
+"41
+[; ;cola.c: 41: }
+[e :UE 3 ]
+}
+"43
+[; ;cola.c: 43: DATOCOLA cola_get(eCola* c)
+[v _cola_get `(uc ~T0 @X0 1 ef1`*S1 ]
+"44
+[; ;cola.c: 44: {
+{
+[e :U _cola_get ]
+"43
+[; ;cola.c: 43: DATOCOLA cola_get(eCola* c)
+[v _c `*S1 ~T0 @X0 1 r1 ]
+"44
+[; ;cola.c: 44: {
+[f ]
+"48
+[; ;cola.c: 48:     DATOCOLA temp;
+[v _temp `uc ~T0 @X0 1 a ]
+"49
+[; ;cola.c: 49:     if(!cola_vacia(c)){
+[e $ ! ! != ( _cola_vacia (1 _c -> 0 `i 8  ]
+{
+"50
+[; ;cola.c: 50:         temp=c->data[c->salida];
+[e = _temp *U + &U . *U _c 0 * -> -> . *U _c 2 `ui `ux -> -> # *U &U . *U _c 0 `ui `ux ]
+"51
+[; ;cola.c: 51:         c->salida++;
+[e ++ . *U _c 2 -> 1 `i ]
+"52
+[; ;cola.c: 52:         c->peso--;
+[e -- . *U _c 3 -> 1 `i ]
+"53
+[; ;cola.c: 53:     }
+}
+[e $U 9  ]
+"54
+[; ;cola.c: 54:     else
+[e :U 8 ]
+"55
+[; ;cola.c: 55:     {
+{
+"56
+[; ;cola.c: 56:         return 1;
+[e ) -> -> 1 `i `uc ]
+[e $UE 7  ]
+"57
+[; ;cola.c: 57:     }
+}
+[e :U 9 ]
+"60
+[; ;cola.c: 60:     if (c->salida >=15)
+[e $ ! >= . *U _c 2 -> 15 `i 10  ]
+"61
+[; ;cola.c: 61:         c->salida=0;
+[e = . *U _c 2 -> 0 `i ]
+[e :U 10 ]
+"62
+[; ;cola.c: 62:     return temp;
+[e ) _temp ]
+[e $UE 7  ]
+"68
+[; ;cola.c: 68: }
+[e :UE 7 ]
+}
+"70
+[; ;cola.c: 70: int tam_cola(eCola* c){
+[v _tam_cola `(i ~T0 @X0 1 ef1`*S1 ]
+{
+[e :U _tam_cola ]
+[v _c `*S1 ~T0 @X0 1 r1 ]
+[f ]
+"71
+[; ;cola.c: 71:     return (c->peso);
+[e ) . *U _c 3 ]
+[e $UE 11  ]
+"72
+[; ;cola.c: 72: }
+[e :UE 11 ]
+}
+"75
+[; ;cola.c: 75: int cola_llena(eCola* c){
+[v _cola_llena `(i ~T0 @X0 1 ef1`*S1 ]
+{
+[e :U _cola_llena ]
+[v _c `*S1 ~T0 @X0 1 r1 ]
+[f ]
+"76
+[; ;cola.c: 76:     if (c->peso>=15){
+[e $ ! >= . *U _c 3 -> 15 `i 13  ]
+{
+"77
+[; ;cola.c: 77:         return 1;
+[e ) -> 1 `i ]
+[e $UE 12  ]
+"78
+[; ;cola.c: 78:     }
+}
+[e $U 14  ]
+"79
+[; ;cola.c: 79:     else{
+[e :U 13 ]
+{
+"80
+[; ;cola.c: 80:         return 0;
+[e ) -> 0 `i ]
+[e $UE 12  ]
+"81
+[; ;cola.c: 81:     }
+}
+[e :U 14 ]
+"82
+[; ;cola.c: 82: }
+[e :UE 12 ]
+}
+"85
+[; ;cola.c: 85: int cola_vacia(eCola* c)
+[v _cola_vacia `(i ~T0 @X0 1 ef1`*S1 ]
+"86
+[; ;cola.c: 86: {
+{
+[e :U _cola_vacia ]
+"85
+[; ;cola.c: 85: int cola_vacia(eCola* c)
+[v _c `*S1 ~T0 @X0 1 r1 ]
+"86
+[; ;cola.c: 86: {
+[f ]
+"87
+[; ;cola.c: 87:     if (c->peso<=0){
+[e $ ! <= . *U _c 3 -> 0 `i 16  ]
+{
+"88
+[; ;cola.c: 88:         return 1;
+[e ) -> 1 `i ]
+[e $UE 15  ]
+"89
+[; ;cola.c: 89:     }
+}
+[e $U 17  ]
+"90
+[; ;cola.c: 90:     else{
+[e :U 16 ]
+{
+"91
+[; ;cola.c: 91:         return 0;
+[e ) -> 0 `i ]
+[e $UE 15  ]
+"92
+[; ;cola.c: 92:     }
+}
+[e :U 17 ]
+"93
+[; ;cola.c: 93: }
+[e :UE 15 ]
+}

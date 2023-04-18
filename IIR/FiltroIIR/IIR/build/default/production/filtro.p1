@@ -1,0 +1,88 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"11 ./filtro.h
+[; ;./filtro.h: 11: typedef struct struct_filtro{
+[s S1 `f -> 3 `i `f -> 3 `i `f -> 3 `i `f 1 `f 1 `f 1 `uc 1 ]
+[n S1 struct_filtro w den num k in y termino_conversion ]
+"3 filtro.c
+[; ;filtro.c: 3: void inicializar_IIR(float*num, float*den, float*w, float k, struct_filtro* ir)
+[v _inicializar_IIR `(v ~T0 @X0 1 ef5`*f`*f`*f`f`*S1 ]
+"4
+[; ;filtro.c: 4: {
+{
+[e :U _inicializar_IIR ]
+"3
+[; ;filtro.c: 3: void inicializar_IIR(float*num, float*den, float*w, float k, struct_filtro* ir)
+[v _num `*f ~T0 @X0 1 r1 ]
+[v _den `*f ~T0 @X0 1 r2 ]
+[v _w `*f ~T0 @X0 1 r3 ]
+[v _k `f ~T0 @X0 1 r4 ]
+[v _ir `*S1 ~T0 @X0 1 r5 ]
+"4
+[; ;filtro.c: 4: {
+[f ]
+"5
+[; ;filtro.c: 5:   for (int i = 0; i < 3; i++) {
+{
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[e $ < _i -> 3 `i 3  ]
+[e $U 4  ]
+[e :U 3 ]
+{
+"6
+[; ;filtro.c: 6:     ir->num[i] = num[i];
+[e = *U + &U . *U _ir 2 * -> -> _i `ui `ux -> -> # *U &U . *U _ir 2 `ui `ux *U + _num * -> _i `x -> -> # *U _num `i `x ]
+"7
+[; ;filtro.c: 7:     ir->den[i] = den[i];
+[e = *U + &U . *U _ir 1 * -> -> _i `ui `ux -> -> # *U &U . *U _ir 1 `ui `ux *U + _den * -> _i `x -> -> # *U _den `i `x ]
+"8
+[; ;filtro.c: 8:     ir->w[i] = w[i];
+[e = *U + &U . *U _ir 0 * -> -> _i `ui `ux -> -> # *U &U . *U _ir 0 `ui `ux *U + _w * -> _i `x -> -> # *U _w `i `x ]
+"9
+[; ;filtro.c: 9:     ir->k = k;
+[e = . *U _ir 3 _k ]
+"10
+[; ;filtro.c: 10:   }
+}
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 3 `i 3  ]
+[e :U 4 ]
+}
+"11
+[; ;filtro.c: 11: }
+[e :UE 2 ]
+}
+"13
+[; ;filtro.c: 13:     float filtrar_dato(struct_filtro* ir, float in)
+[v _filtrar_dato `(f ~T0 @X0 1 ef2`*S1`f ]
+"14
+[; ;filtro.c: 14: {
+{
+[e :U _filtrar_dato ]
+"13
+[; ;filtro.c: 13:     float filtrar_dato(struct_filtro* ir, float in)
+[v _ir `*S1 ~T0 @X0 1 r1 ]
+[v _in `f ~T0 @X0 1 r2 ]
+"14
+[; ;filtro.c: 14: {
+[f ]
+"15
+[; ;filtro.c: 15:   ir->w[0] = (ir->den[0]*in*ir->k) - (ir->den[1]*ir->w[1]) - (ir->den[2] * ir->w[2]);
+[e = *U + &U . *U _ir 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _ir 0 `ui `ux - - * * *U + &U . *U _ir 1 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _ir 1 `ui `ux _in . *U _ir 3 * *U + &U . *U _ir 1 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _ir 1 `ui `ux *U + &U . *U _ir 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _ir 0 `ui `ux * *U + &U . *U _ir 1 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _ir 1 `ui `ux *U + &U . *U _ir 0 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _ir 0 `ui `ux ]
+"17
+[; ;filtro.c: 17:   ir -> y = ((ir->num[0] * ir->w[0]) + (ir->num[1] * ir->w[1]) + (ir->num[2] * ir->w[2]));
+[e = . *U _ir 5 + + * *U + &U . *U _ir 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _ir 2 `ui `ux *U + &U . *U _ir 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _ir 0 `ui `ux * *U + &U . *U _ir 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _ir 2 `ui `ux *U + &U . *U _ir 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _ir 0 `ui `ux * *U + &U . *U _ir 2 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _ir 2 `ui `ux *U + &U . *U _ir 0 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _ir 0 `ui `ux ]
+"18
+[; ;filtro.c: 18:   ir->w[2] = ir->w[1];
+[e = *U + &U . *U _ir 0 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _ir 0 `ui `ux *U + &U . *U _ir 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _ir 0 `ui `ux ]
+"19
+[; ;filtro.c: 19:   ir->w[1] = ir->w[0];
+[e = *U + &U . *U _ir 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _ir 0 `ui `ux *U + &U . *U _ir 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _ir 0 `ui `ux ]
+"20
+[; ;filtro.c: 20:   return ir ->y;
+[e ) . *U _ir 5 ]
+[e $UE 6  ]
+"21
+[; ;filtro.c: 21: }
+[e :UE 6 ]
+}

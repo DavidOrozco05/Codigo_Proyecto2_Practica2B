@@ -1,0 +1,206 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"32 filtro.c
+[; ;filtro.c: 32:  const char B[31] = {
+[v _B `Cuc ~T0 @X0 -> 31 `i e ]
+[i _B
+:U ..
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 6 `i `uc
+-> -> 26 `i `uc
+-> -> 58 `i `uc
+-> -> 76 `i `uc
+-> -> 58 `i `uc
+-> -> 26 `i `uc
+-> -> 6 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+..
+]
+"40
+[; ;filtro.c: 40: volatile int x[31];
+[v _x `Vi ~T0 @X0 -> 31 `i e ]
+"41
+[; ;filtro.c: 41: volatile int k=0;
+[v _k `Vi ~T0 @X0 1 e ]
+[i _k
+-> 0 `i
+]
+"42
+[; ;filtro.c: 42: volatile int q = 1;
+[v _q `Vi ~T0 @X0 1 e ]
+[i _q
+-> 1 `i
+]
+"44
+[; ;filtro.c: 44: int filtrar_dato(long in)
+[v _filtrar_dato `(i ~T0 @X0 1 ef1`l ]
+"45
+[; ;filtro.c: 45: {
+{
+[e :U _filtrar_dato ]
+"44
+[; ;filtro.c: 44: int filtrar_dato(long in)
+[v _in `l ~T0 @X0 1 r1 ]
+"45
+[; ;filtro.c: 45: {
+[f ]
+"46
+[; ;filtro.c: 46:   int i = 0;
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+"47
+[; ;filtro.c: 47:   x[k] = in;
+[e = *U + &U _x * -> -> _k `Vui `ux -> -> # *U &U _x `ui `ux -> _in `i ]
+"48
+[; ;filtro.c: 48:   int inx = k;
+[v _inx `i ~T0 @X0 1 a ]
+[e = _inx _k ]
+"49
+[; ;filtro.c: 49:   int anx = q;
+[v _anx `i ~T0 @X0 1 a ]
+[e = _anx _q ]
+"50
+[; ;filtro.c: 50:   char *apuntadorcoef = &B[0];
+[v _apuntadorcoef `*uc ~T0 @X0 1 a ]
+[e = _apuntadorcoef -> &U *U + &U _B * -> -> -> 0 `i `ui `ux -> -> # *U &U _B `ui `ux `*uc ]
+"51
+[; ;filtro.c: 51:   int *apuntadorarrc = &x[inx];
+[v _apuntadorarrc `*i ~T0 @X0 1 a ]
+[e = _apuntadorarrc -> &U *U + &U _x * -> -> _inx `ui `ux -> -> # *U &U _x `ui `ux `*i ]
+"52
+[; ;filtro.c: 52:   int *apuntadorinv = &x[anx];
+[v _apuntadorinv `*i ~T0 @X0 1 a ]
+[e = _apuntadorinv -> &U *U + &U _x * -> -> _anx `ui `ux -> -> # *U &U _x `ui `ux `*i ]
+"55
+[; ;filtro.c: 55:   long y = 0;
+[v _y `l ~T0 @X0 1 a ]
+[e = _y -> -> 0 `i `l ]
+"56
+[; ;filtro.c: 56:   for (i = 0; i < (int)(31/2); ++i) {
+{
+[e = _i -> 0 `i ]
+[e $ < _i / -> 31 `i -> 2 `i 2  ]
+[e $U 3  ]
+[e :U 2 ]
+{
+"57
+[; ;filtro.c: 57:     y += (long)(*apuntadorcoef) * ((long)(*apuntadorarrc) + (long)(*apuntadorinv));
+[e =+ _y * -> *U _apuntadorcoef `l + -> *U _apuntadorarrc `l -> *U _apuntadorinv `l ]
+"58
+[; ;filtro.c: 58:     apuntadorcoef++;
+[e ++ _apuntadorcoef * -> -> 1 `i `x -> -> # *U _apuntadorcoef `i `x ]
+"59
+[; ;filtro.c: 59:     if (inx != 0) {
+[e $ ! != _inx -> 0 `i 5  ]
+{
+"60
+[; ;filtro.c: 60:       apuntadorarrc--;
+[e -- _apuntadorarrc * -> -> 1 `i `x -> -> # *U _apuntadorarrc `i `x ]
+"61
+[; ;filtro.c: 61:       inx--;
+[e -- _inx -> 1 `i ]
+"62
+[; ;filtro.c: 62:     }
+}
+[e $U 6  ]
+"63
+[; ;filtro.c: 63:     else {
+[e :U 5 ]
+{
+"64
+[; ;filtro.c: 64:       apuntadorarrc = &x[31 - 1];
+[e = _apuntadorarrc -> &U *U + &U _x * -> -> - -> 31 `i -> 1 `i `ui `ux -> -> # *U &U _x `ui `ux `*i ]
+"65
+[; ;filtro.c: 65:       inx = 31 - 1;
+[e = _inx - -> 31 `i -> 1 `i ]
+"66
+[; ;filtro.c: 66:     }
+}
+[e :U 6 ]
+"67
+[; ;filtro.c: 67:     if (anx != 31 -1){
+[e $ ! != _anx - -> 31 `i -> 1 `i 7  ]
+{
+"68
+[; ;filtro.c: 68:         apuntadorinv++;
+[e ++ _apuntadorinv * -> -> 1 `i `x -> -> # *U _apuntadorinv `i `x ]
+"69
+[; ;filtro.c: 69:         anx++;
+[e ++ _anx -> 1 `i ]
+"70
+[; ;filtro.c: 70:     }
+}
+[e $U 8  ]
+"71
+[; ;filtro.c: 71:     else{
+[e :U 7 ]
+{
+"72
+[; ;filtro.c: 72:     apuntadorinv = &x[0];
+[e = _apuntadorinv -> &U *U + &U _x * -> -> -> 0 `i `ui `ux -> -> # *U &U _x `ui `ux `*i ]
+"73
+[; ;filtro.c: 73:     anx = 0;
+[e = _anx -> 0 `i ]
+"74
+[; ;filtro.c: 74:     }
+}
+[e :U 8 ]
+"75
+[; ;filtro.c: 75:   }
+}
+[e =+ _i -> 1 `i ]
+[e $ < _i / -> 31 `i -> 2 `i 2  ]
+[e :U 3 ]
+}
+"76
+[; ;filtro.c: 76:   if(31 % 2 == 1){
+[e $ ! == % -> 31 `i -> 2 `i -> 1 `i 9  ]
+{
+"77
+[; ;filtro.c: 77:       y += (long)(*apuntadorcoef) * ((long)(*apuntadorarrc));
+[e =+ _y * -> *U _apuntadorcoef `l -> *U _apuntadorarrc `l ]
+"78
+[; ;filtro.c: 78:   }
+}
+[e :U 9 ]
+"79
+[; ;filtro.c: 79:   k++;
+[e ++ _k -> -> 1 `i `Vi ]
+"80
+[; ;filtro.c: 80:   q++;
+[e ++ _q -> -> 1 `i `Vi ]
+"81
+[; ;filtro.c: 81:   k = (k >= 31) ? 0 : k;
+[e = _k ? >= _k -> 31 `i : -> 0 `i _k ]
+"82
+[; ;filtro.c: 82:   q = (q >= 31) ? 0 : q;
+[e = _q ? >= _q -> 31 `i : -> 0 `i _q ]
+"83
+[; ;filtro.c: 83:   return y>>8;
+[e ) -> >> _y -> 8 `i `i ]
+[e $UE 1  ]
+"84
+[; ;filtro.c: 84: }
+[e :UE 1 ]
+}
